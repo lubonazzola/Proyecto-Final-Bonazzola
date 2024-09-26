@@ -1,0 +1,184 @@
+@mixin flex-center($direction: row, $justify: center, $align: center) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+  }
+  
+  @mixin text-style($color, $size, $weight: normal, $transform: none) {
+    color: $color;
+    font-size: $size;
+    font-weight: $weight;
+    text-transform: $transform;
+  }
+
+  %card-style {
+    background-color: white;
+    border: 1px solid $border-color;
+    border-radius: 5px;
+    padding: $spacing-medium;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    overflow: hidden;
+    
+    &:hover {
+      transform: translateY(-5px);
+    }
+  }
+  
+  .presentacion {
+    @include flex-center(column);
+    padding: $spacing-medium;
+    background-color: $primary-color;
+  
+    article {
+      @include flex-center(column);
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: $spacing-small;
+  
+      .imagen {
+        width: 100%;
+        padding-bottom: $spacing-medium;
+  
+        img {
+          max-width: 100%;
+          height: auto;
+          border-radius: 8px;
+        }
+      }
+  
+      .nosotros2 {
+        width: 100%;
+        
+        h2 {
+          @include text-style($secondary-text-color, 24px, $fuente-grande, uppercase);
+          margin-bottom: $spacing-small;
+          text-align: center;
+        }
+  
+        p {
+          @include text-style($secondary-text-color, 16px);
+          line-height: 1.5;
+          text-align: justify;
+        }
+      }
+    }
+  }
+
+  .main-servicios {
+    background-color: $secondary-color;
+    padding: 50px 0;
+    text-align: center;
+  
+    .h2-servicios {
+      @include text-style($titles-color, xx-large, $fuente-grande, uppercase);
+      margin-bottom: 30px;
+      border-bottom: $border-width solid $border-color;
+      padding-bottom: $spacing-small;
+      width: fit-content;
+      margin: 0 auto;
+    }
+  
+    .servicio-cards {
+      @include flex-center(row, space-around, flex-start);
+      flex-wrap: wrap;
+      gap: $spacing-medium;
+  
+      .card-servicio {
+        @extend %card-style;
+        max-width: 300px;
+  
+        .card-img-top {
+          width: 100%;
+          height: auto;
+          border-bottom: 1px solid $border-color;
+          padding-bottom: $spacing-small;
+          margin-bottom: $spacing-small;
+        }
+  
+        .card-body {
+          text-align: center;
+  
+          .card-p {
+            @include text-style($text-color, 1.2em, bold);
+          }
+        }
+      }
+    }
+  }
+
+  .aseguradoras {
+    @include flex-center(row, space-between);
+    background-color: $primary-color;
+    padding: $padding-large;
+  
+    .compañias-container {
+      flex: 0 0 40%;
+      min-width: 200px;
+    }
+  
+    .imagenes-container {
+      flex: 1;
+      @include flex-center(row, space-around);
+      flex-wrap: wrap;
+  
+      img {
+        max-width: 100px;
+        margin: $spacing-small;
+        height: auto;
+      }
+    }
+  
+    .compañias {
+      @include text-style($titles-color, xx-large, $fuente-grande, uppercase);
+      border-left: $border-width solid $border-color;
+      padding-left: $spacing-small;
+    }
+  }
+
+  @media (max-width: $tablet) {
+    .presentacion {
+      padding: $spacing-small;
+  
+      .nosotros2 h2 {
+        font-size: 20px;
+      }
+  
+      .nosotros2 p {
+        font-size: 14px;
+      }
+    }
+  
+    .h2-servicios {
+      font-size: 2em;
+    }
+  
+    .card-servicio {
+      width: 90%;
+    }
+  
+    .compañias {
+      text-align: center;
+      border-bottom: $border-width solid $border-color;
+    }
+  
+    .imagenes-container img {
+      max-width: 80px;
+    }
+  }
+  
+  @media (min-width: $tablet) and (max-width: 1024px) {
+    .compañias {
+      text-align: center;
+      border-bottom: $border-width solid $border-color;
+    }
+  }
+  
+  @media (min-width: 1025px) {
+    .compañias {
+      border-left: $border-width solid $border-color;
+    }
+  }
+  
+

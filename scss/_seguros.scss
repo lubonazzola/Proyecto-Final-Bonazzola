@@ -1,0 +1,87 @@
+@mixin card-shadow {
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+@mixin transition($property, $duration, $ease) {
+    transition: $property $duration $ease;
+}
+
+%card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    max-width: 100%;
+    @include card-shadow;
+}
+
+.main-seguros {
+    background-color: $background-color;
+    padding: $padding-large 10px;
+    text-align: center;
+
+    .seguros-cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        margin-bottom: $spacing-medium;
+        gap: $spacing-small;
+
+        .card-seguro {
+            @extend %card;
+            padding: 20px;
+            @include transition(transform, 0.3s, ease);
+
+            &:hover {
+                transform: translateY(-5px);
+            }
+
+            .card-img-top {
+                width: 100%;
+                height: auto;
+                border-bottom: 1px solid #ddd;
+                padding-bottom: 15px;
+                margin-bottom: 15px;
+            }
+
+            .card-body {
+                text-align: center;
+
+                .card-title {
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                    color: $text-color;
+                    margin: 0;
+                }
+            }
+        }
+    }
+
+    @media (max-width: $tablet) {
+        .seguros-cards {
+            grid-template-columns: 1fr; 
+
+            .card-seguro {
+                padding: 15px;
+
+                .card-title {
+                    font-size: 1.2rem;
+                }
+            }
+        }
+    }
+
+    @media (max-width: 480px) {
+        .card-seguro {
+            padding: 10px;
+
+            .card-title {
+                font-size: 1rem;
+            }
+
+            .card-img-top {
+                padding-bottom: 10px;
+                margin-bottom: 10px;
+            }
+        }
+    }
+}

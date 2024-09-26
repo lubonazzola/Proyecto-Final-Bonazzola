@@ -1,0 +1,136 @@
+@mixin center-content {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  @mixin card-layout($max-width: 300px) {
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: none;
+    overflow: hidden;
+    max-width: $max-width;
+    margin: 10px;
+    flex: 1 1 30%;
+  }
+  
+  @mixin responsive-text($size) {
+    font-size: $size;
+    line-height: 1.6rem;
+    text-align: center;
+  }
+  
+  @mixin flex-center($direction: row, $justify: center, $align: center) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+  }
+  
+  %full-width-img {
+    width: 100%;
+    height: auto;
+  }
+  
+  %center-title {
+    text-align: center;
+    color: $titles-color;
+    text-transform: uppercase;
+    border-bottom: $border-width solid $border-color;
+    @include center-content;
+  }
+  
+  #blog {
+    background-color: $primary-color;
+  
+    .section-blog {
+      background-color: $secondary-color;
+      padding: $padding-large $spacing-small;
+  
+      .h2-center {
+        @extend %center-title;
+        font-size: $fuente-mediana;
+        margin-bottom: $spacing-medium;
+        padding-bottom: $spacing-small;
+      }
+  
+      .blog-cards {
+        @include flex-center(row, space-around, flex-start);
+        flex-wrap: wrap;
+      }
+  
+      .card-blog {
+        @include card-layout;
+        
+        img, iframe {
+          @extend %full-width-img;
+        }
+  
+        .card-body {
+          padding: $spacing-medium;
+        }
+  
+        .card-pa {
+          @include responsive-text(14px);
+          color: $secondary-text-color;
+        }
+      }
+    }
+    
+    @media (max-width: $tablet) {
+      .section-blog {
+        .h2-center {
+          font-size: $fuente-mediana;
+        }
+  
+        .blog-cards {
+          @include flex-center(column, center, center);
+        }
+  
+        .card-blog {
+          max-width: 90%;
+          margin: $spacing-small 0;
+        }
+  
+        .card-pa {
+          font-size: large;
+        }
+      }
+    }
+  
+    @media (min-width: $tablet) and (max-width: $desktop) {
+      .section-blog {
+        .h2-center {
+          font-size: $fuente-mediana;
+        }
+  
+        .blog-cards {
+          @include flex-center(wrap, center, flex-start);
+        }
+  
+        .card-blog {
+          max-width: 45%;
+        }
+  
+        .card-pa {
+          font-size: small;
+        }
+      }
+    }
+  
+    @media (min-width: $desktop) {
+      .section-blog {
+        .h2-center {
+          font-size: $fuente-mediana;
+        }
+  
+        .card-blog {
+          max-width: 300px;
+        }
+  
+        .card-pa {
+          font-size: 14px;
+        }
+      }
+    }
+  }
